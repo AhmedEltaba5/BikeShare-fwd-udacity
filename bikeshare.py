@@ -131,6 +131,26 @@ def display_rows(df, display_head):
         pd.set_option('display.max_columns', None) # to show all columns
         print('The first five rows:\n')
         print(df.head(5))
+        # iterate asking question to show next five rows
+        iterate_rows = True
+        start_idx = 5
+        while iterate_rows:
+            next_rows = input('Would you like to display next five rows? yes/no\n').lower()
+            if next_rows == 'yes':
+                #iterate
+                # check if we reached end of dataframe
+                if (start_idx + 5) >= len(df):
+                    print(df.iloc[start_idx:])
+                    print('end of dataframe!')
+                    iterate_rows = False
+                else:
+                    print(df.iloc[start_idx:start_idx+5])
+                    start_idx = start_idx + 5
+            elif next_rows == 'no':
+                #stop
+                iterate_rows = False
+            else:
+                print('Please enter yes/no!')
     
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
